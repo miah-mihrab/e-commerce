@@ -1,0 +1,50 @@
+<div class="container border border-top-0 border-left-0 border-right-0" style="background-color: #fffefe">
+  <div class="row">
+    <div class="col-4 p-1">
+
+      <span>Serach Category</span><br>
+      <input type="checkbox" id="watch" name="watch" (change)="filterByCategory($event)">
+      <label for="watch">Watches</label><br>
+      <input type="checkbox" id="fashion" name="fashion" (change)="filterByCategory($event)">
+      <label for="fashion">Fashion</label><br>
+
+    </div>
+
+    <div class="col-4 p-1">
+
+      <span>Serach By Price</span><br>
+      <input type="checkbox" name="10-20" (change)="filterByPrice($event)">
+      <label for="watch">$(10 - 20)</label><br>
+      <input type="checkbox" name="20-90" (change)="filterByPrice($event)">
+      <label for="fashion">$(20 - 90)</label><br>
+
+    </div>
+    <div class="col-4 p-1">
+      <input type="text" class="form-control mt-4" placeholder="Search By Product Name">
+    </div>
+  </div>
+</div>
+
+
+
+<div class="row">
+  <ng-container *ngFor="let product of products; let i=index">
+    <div class="card mt-2 ml-3" style="width: 15rem" [class.mLeft]="((i+1)%5)===0">
+      <img [src]="product['data']['imgUrl']" alt="Card image cap" width=200>
+      <div class="card-body">
+
+        <p class="title">{{ product['data']['Name'] }}</p>
+        <p class="card-text">
+          <span>Price: {{ product['data']['Price'] | currency }}</span><br>
+          <span>Comp: {{ product['data']['Company'] }}</span>
+        </p>
+
+        <button type="button" class="btn btn-sm btn-outline-primary" (click)="addItem(product['id'])">Add to cart
+        </button>
+        <button type="button" class="btn btn-sm btn-outline-secondary float-right"
+          [routerLink]="['/product', product.id]">Details</button>
+
+      </div>
+    </div>
+  </ng-container>
+</div>

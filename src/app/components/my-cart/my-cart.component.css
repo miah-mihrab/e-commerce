@@ -1,0 +1,24 @@
+.my-product {
+  transition: 0.4s all ease-in-out;
+}
+
+.my-product:nth-child(odd) {
+  background-color: #444444;
+  padding: 5%;
+  color: white;
+}
+
+
+.my-product:nth-child(even) {
+  background-color: #dddddd;
+  padding: 5%;
+}
+
+.my-product:hover {
+  transform: translateY(-10px);
+  cursor: pointer;
+}
+
+.amount {
+  overflow: hidden;
+}
