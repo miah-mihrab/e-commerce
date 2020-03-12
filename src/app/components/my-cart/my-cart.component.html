@@ -1,36 +1,40 @@
 <div class="container mt-5">
-  <h4 class="My Orders"></h4>
+  <div *ngIf="!cartEmpty">
+    <h4 class="My Orders"></h4>
+    <div class="row">
+      <div scope="" class="col-3 text-center" style="font-weight:bold;">Product</div>
+      <div scope="" class="col-3 text-center" style="font-weight:bold;">Amount</div>
+      <div scope="" class="col-2 text-center" style="font-weight:bold;">$Total</div>
+      <div scope="" class="col-3 text-center" style="font-weight:bold;">Actions</div>
+    </div>
+    <br>
+    <div class="row">
 
-  <div class="row">
-    <div scope="" class="col-3 text-center" style="font-weight:bold;">Product</div>
-    <div scope="" class="col-3 text-center" style="font-weight:bold;">Amount</div>
-    <div scope="" class="col-2 text-center" style="font-weight:bold;">Total</div>
-    <div scope="" class="col-3 text-center" style="font-weight:bold;">Actions</div>
-  </div>
-  <br>
-  <div class="row">
-
-    <ng-container *ngFor="let product of myProducts; let i=index">
-      <div class="col-12 rounded mt-1 my-product" [id]="itemKeys[i]">
-        <div class="row">
-          <div class="text-center col-3" class="dottedText">{{ product['Name'] }}</div>
-          <div class=" col-3 amount"><input type="form-control" [(ngModel)]="totalItem[i]"></div>
-          <div class="text-center col-2">{{ totalItem[i] * product['Price'] || 0 }}</div>
-          <div class="text-center col-3">
-            <button type="button" class="btn btn-outline-success btn-sm ml-2"
-              (click)="add(i, product['Price'], itemKeys[i])">+</button>
-            <button type="button" class="btn btn-outline-warning btn-sm ml-2"
-              (click)="sub(i, product['Price'], itemKeys[i])">-</button>
-            <button type="button" class="btn btn-outline-danger btn-sm  ml-2"
-              (click)="removeFromCart(itemKeys[i], i)">&times;</button>
+      <ng-container *ngFor="let product of myProducts; let i=index">
+        <div class="col-12 rounded mt-1 my-product" [id]="itemKeys[i]">
+          <div class="row">
+            <div class="text-center col-3" class="dottedText">{{ product['Name'] }}</div>
+            <div class=" col-3 amount"><input type="form-control" [(ngModel)]="totalItem[i]"></div>
+            <div class="text-center col-2">{{ totalItem[i] * product['Price'] || 0 }}</div>
+            <div class="text-center col-3">
+              <button type="button" class="btn btn-outline-success btn-sm ml-2"
+                (click)="add(i, product['Price'], itemKeys[i])">+</button>
+              <button type="button" class="btn btn-outline-warning btn-sm ml-2"
+                (click)="sub(i, product['Price'], itemKeys[i])">-</button>
+              <button type="button" class="btn btn-outline-danger btn-sm  ml-2"
+                (click)="removeFromCart(itemKeys[i], i)">&times;</button>
+            </div>
           </div>
         </div>
-      </div>
 
-    </ng-container>
+      </ng-container>
+    </div>
+    <div class="col-12 text-right mt-4 border border-left-0 border-right-0 border-bottom-0"
+      style="padding-right: 50px !important">
+      <h4>Total: {{ total | currency }}</h4>
+    </div>
   </div>
-  <div class="col-12 text-right mt-4 border border-left-0 border-right-0 border-bottom-0"
-    style="padding-right: 50px !important">
-    <h4>Total: {{ total | currency }}</h4>
+  <div #noProducts *ngIf="cartEmpty">
+    No Products
   </div>
 </div>

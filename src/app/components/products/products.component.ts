@@ -1,10 +1,6 @@
+import { ProductService } from './../../services/product.service';
 import { Component, OnInit } from "@angular/core";
 import { AngularFirestore } from "@angular/fire/firestore";
-
-interface productTypes {
-  fashion: boolean;
-  watch: boolean;
-}
 
 @Component({
   selector: "app-products",
@@ -13,13 +9,11 @@ interface productTypes {
 })
 export class ProductsComponent implements OnInit {
   products;
-  userDB: any;
+  productName;
+  userRef: any;
   filterValue = [];
-  watch;
-  fashion;
   reservedProducts: any;
-  _filterByPrice = [];
-  constructor(private db: AngularFirestore) { }
+  constructor(private db: AngularFirestore, private productService: ProductService) { }
 
   ngOnInit(): void {
     // this.db.collection('products').add({
@@ -40,11 +34,9 @@ export class ProductsComponent implements OnInit {
     // })
 
     //Get The User Collection For First Time
-    this.userDB = this.db.collection("users").doc("vZUKc5UyL93uhZ9tAmur");
+    this.userRef = this.productService.getUserRef();
 
-    this.db
-      .collection("products")
-      .snapshotChanges()
+    this.productService.getProducts()
       .subscribe(e => {
         this.products = e.map(data => {
           return {
@@ -52,19 +44,19 @@ export class ProductsComponent implements OnInit {
             id: data.payload.doc.id
           };
         });
-        // console.log(this.products)
         this.reservedProducts = this.products;
       });
   }
 
   addItem(product_id) {
+
     //Add items to an individual's database
-    this.userDB.get().subscribe(e => {
-      //Find does item exist on user cart or set 0
+    this.userRef.get().subscribe(e => {
+      //Find item on user cart or set 0
       let isItem = 0;
       if (e.data()["itemInCart"]) {
         isItem = e.data()["itemInCart"][product_id] || 0;
-        this.userDB.set(
+        this.userRef.set(
           {
             itemInCart: {
               [product_id]: isItem + 1
@@ -74,7 +66,7 @@ export class ProductsComponent implements OnInit {
         );
       }
       if (!e.data()["itemInCart"]) {
-        this.userDB.set(
+        this.userRef.set(
           {
             itemInCart: {
               [product_id]: isItem + 1
@@ -85,58 +77,17 @@ export class ProductsComponent implements OnInit {
       }
     });
   }
-  filterByCategory(event) {
-    this.filterValue[event.target.name] = !this.filterValue[event.target.name];
 
-    let keys = Object.keys(this.filterValue);
-    let filteredArray = [];
-    for (let i = 0; i < keys.length; i++) {
-      for (let j = 0; j < Array.from(this.reservedProducts).length; j++) {
-        console.log(
-          this.reservedProducts[j]["data"].Type,
-          keys[i],
-          this.filterValue[keys[i]]
-        );
-        if (
-          this.reservedProducts[j]["data"].Type === keys[i] &&
-          this.filterValue[keys[i]] === true
-        ) {
-          filteredArray.push(this.reservedProducts[j]);
-        }
-      }
-    }
-    if (filteredArray.length > 0) {
-      this.products = filteredArray;
-    } else {
-      this.products = this.reservedProducts;
-    }
+
+  filterByCategory(event) {
+    this.products = this.productService.filterByCategory(this.reservedProducts, event)
   }
 
   filterByPrice(event) {
-    this._filterByPrice[event.target.name] = !this._filterByPrice[
-      event.target.name
-    ];
-    // console.log(this._filterByPrice)
-    let keys = Object.keys(this._filterByPrice);
-    let filteredArray = [];
-    for (let i = 0; i < keys.length; i++) {
-      for (let j = 0; j < Array.from(this.reservedProducts).length; j++) {
-        // console.log(keys[i])
-        if (this._filterByPrice[keys[i]] === true) {
-          let numberRange = event.target.name.split("-");
-          console.log(parseInt(numberRange[0]) >= 8)
-          if (this.reservedProducts[j]["data"].Price >= parseInt(numberRange[0]) && parseInt(numberRange[1]) >= this.reservedProducts[j]["data"].Price) {
-            console.log("HERE");
-            filteredArray.push(this.reservedProducts[j]);
-          }
-        }
-      }
-    }
-    if (filteredArray.length > 0) {
-      this.products = filteredArray;
-      filteredArray = [];
-    } else {
-      this.products = this.reservedProducts;
-    }
+    this.products = this.productService.filterByPrice(this.reservedProducts, event)
+  }
+
+  filterByName() {
+    this.products = this.productService.filterByName(this.reservedProducts, this.productName);
   }
 }

@@ -4,17 +4,17 @@
       <img [src]="product['imgUrl']" alt="" />
       <p>{{ product["Name"] }}</p>
       <p>Price: {{ product['Price'] | currency}}</p>
-      <div>
+      <div class="mb-3 clearfix">
         <div class=" text-center" style="float:left;">
-          <button type="button" class="btn btn-outline-warning btn-sm ml-2" (click)="sub()">-</button>
-
+          <button type="button" class="btn btn-outline-warning btn-md ml-3" (click)="sub()">-</button>
         </div>
-        <div class="text-center" style="float:left; margin-left: 10px;"><input type="form-control"
-            [(ngModel)]="isInCart" /></div>
+        <div class="text-center" style="float:left; margin-left: 10px;"><input class="form-control text-center"
+            [(ngModel)]="inCart" /></div>
         <div class="text-center" style="float:left;">
-          <button type="button" class="btn btn-outline-success btn-sm ml-2" (click)="add()">+</button>
+          <button type="button" class="btn btn-outline-success btn-md ml-2" (click)="add()">+</button>
         </div>
-      </div>
+
+      </div> <button class="btn btn-outline-success btn-md btn-block" (click)="addToCart()">Add To Cart</button>
     </div>
     <div class="col-6">
       <ul class="list-group list-group-flush">

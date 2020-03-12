@@ -20,7 +20,8 @@
 
     </div>
     <div class="col-4 p-1">
-      <input type="text" class="form-control mt-4" placeholder="Search By Product Name">
+      <input type="text" class="form-control mt-4" placeholder="Search By Product Name" [(ngModel)]="productName"
+        (input)="filterByName()">
     </div>
   </div>
 </div>

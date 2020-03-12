@@ -9,10 +9,12 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProductComponent implements OnInit {
 
+
   product: any;
   userRef: any;
-  isInCart: any;
+  inCart: any = 1;
   id: any;
+
   constructor(private db: AngularFirestore, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -27,41 +29,62 @@ export class ProductComponent implements OnInit {
       });
     })
 
-    this.userRef.get().subscribe(e => {
-      this.isInCart = e.data()['itemInCart'][this.id] || 0;
-    })
   }
-
 
 
   add() {
-    this.userRef.get().subscribe(e => {
-      if (e.data()['itemInCart'][this.id]) {
-        let obj = e.data()['itemInCart'];
-        obj[this.id] = obj[this.id] + 1;
-        this.userRef.update({ itemInCart: obj })
+    this.inCart += 1;
+    // if (this.inCart === null || this.inCart === undefined) {
+    //   this.inCart = 0;
+    // }
+    // if (this.inCart != 0) {
+    //   this.userRef.get().subscribe(e => {
+    //     if (e.data()['itemInCart'][this.id]) {
+    //       let obj = e.data()['itemInCart'];
+    //       obj[this.id] += 1;
+    //       this.userRef.update({ itemInCart: obj })
 
-      } else {
-        this.userRef.set({
-          itemInCart: {
-            [this.id]: 1
-          }
-        }, { merge: true })
-        this.isInCart += 1;
-        console.log(this.isInCart)
-      }
-    })
+    //     } else {
+    //       this.userRef.set({
+    //         itemInCart: {
+    //           [this.id]: 1
+    //         }
+    //       }, { merge: true })
+    //     }
+    //   })
+    // }
   }
 
   sub() {
+    this.inCart -= 1;
+    // this.userRef.get().subscribe(e => {
+    //   let obj = e.data()['itemInCart'];
+    //   obj[this.id] = (obj[this.id] - 1 >= 0) ? obj[this.id] - 1 : 0;
+    //   if (obj[this.id] === 0) delete obj[this.id];
+    //   this.userRef.update({ itemInCart: obj })
+    //   this.inCart = obj[this.id] || 0;
 
-    this.userRef.get().subscribe(e => {
-      let obj = e.data()['itemInCart'];
-      obj[this.id] = obj[this.id] - 1;
-      if (obj[this.id] === 0) delete obj[this.id];
-      this.userRef.update({ itemInCart: obj })
-      this.isInCart = obj[this.id];
+    // })
+  }
 
-    })
+  addToCart() {
+    if (this.inCart != 0) {
+      this.userRef.get().subscribe(e => {
+        if (e.data()['itemInCart'][this.id]) {
+          let obj = e.data()['itemInCart'];
+          obj[this.id] += parseFloat(this.inCart);
+          this.userRef.update({ itemInCart: obj })
+          this.inCart = 1;
+        } else {
+          this.userRef.set({
+            itemInCart: {
+              [this.id]: parseFloat(this.inCart)
+            }
+          }, { merge: true }).then(() => {
+            this.inCart = 1
+          })
+        }
+      })
+    }
   }
 }
