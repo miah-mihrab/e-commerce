@@ -1,3 +1,4 @@
+import { AngularFireAuth } from '@angular/fire/auth';
 import { MyCartService } from './../../services/my-cart.service';
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -17,25 +18,30 @@ export class MyCartComponent implements OnInit {
   total = 0;
   userRef: any;
   cartEmpty: boolean = true;
-  constructor(private db: AngularFirestore, private myCartService: MyCartService) { }
+  constructor(private db: AngularFirestore, private myCartService: MyCartService, private aFAuth: AngularFireAuth) { }
 
   ngOnInit(): void {
-    this.userRef = this.myCartService.getUserRef();
 
-    this.userRef.get().subscribe(e => {
-      this.itemKeys = Object.keys(e.data()['itemInCart']);
+    this.aFAuth.authState.subscribe(state => {
+      if (state) {
+        this.userRef = this.myCartService.getUserRef(state.email);
+        this.userRef.get().subscribe(e => {
+          this.itemKeys = Object.keys(e.data()['itemInCart']);
 
-      for (let i = 0; i < this.itemKeys.length; i++) {
-        this.db.collection('products').doc(this.itemKeys[i]).get().subscribe(d => {
-          this.myProducts[i] = d.data();
-          this.totalItem[i] = e.data()['itemInCart'][this.itemKeys[i]];
-          this.totalPrice[i] = e.data()['itemInCart'][this.itemKeys[i]] * d.data()['Price']; //Total price of a product based on number of amount
-          this.total += this.totalPrice[i]; //Total Price of the products that has been selected
+          for (let i = 0; i < this.itemKeys.length; i++) {
+            this.db.collection('products').doc(this.itemKeys[i]).get().subscribe(d => {
+              this.myProducts[i] = d.data();
+              this.totalItem[i] = e.data()['itemInCart'][this.itemKeys[i]];
+              this.totalPrice[i] = e.data()['itemInCart'][this.itemKeys[i]] * d.data()['Price']; //Total price of a product based on number of amount
+              this.total += this.totalPrice[i]; //Total Price of the products that has been selected
 
-          this.cartEmpty = false;
-        })
+              this.cartEmpty = false;
+            })
+          }
+        });
       }
-    });
+    })
+
 
   }
 

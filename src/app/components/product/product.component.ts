@@ -34,37 +34,10 @@ export class ProductComponent implements OnInit {
 
   add() {
     this.inCart += 1;
-    // if (this.inCart === null || this.inCart === undefined) {
-    //   this.inCart = 0;
-    // }
-    // if (this.inCart != 0) {
-    //   this.userRef.get().subscribe(e => {
-    //     if (e.data()['itemInCart'][this.id]) {
-    //       let obj = e.data()['itemInCart'];
-    //       obj[this.id] += 1;
-    //       this.userRef.update({ itemInCart: obj })
-
-    //     } else {
-    //       this.userRef.set({
-    //         itemInCart: {
-    //           [this.id]: 1
-    //         }
-    //       }, { merge: true })
-    //     }
-    //   })
-    // }
   }
 
   sub() {
     this.inCart -= 1;
-    // this.userRef.get().subscribe(e => {
-    //   let obj = e.data()['itemInCart'];
-    //   obj[this.id] = (obj[this.id] - 1 >= 0) ? obj[this.id] - 1 : 0;
-    //   if (obj[this.id] === 0) delete obj[this.id];
-    //   this.userRef.update({ itemInCart: obj })
-    //   this.inCart = obj[this.id] || 0;
-
-    // })
   }
 
   addToCart() {

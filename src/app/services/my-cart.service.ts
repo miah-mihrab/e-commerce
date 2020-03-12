@@ -15,8 +15,8 @@ export class MyCartService {
   constructor(private db: AngularFirestore) { }
 
 
-  getUserRef() {
-    return this.db.collection('users').doc('vZUKc5UyL93uhZ9tAmur');
+  getUserRef(userId) {
+    return this.db.collection('users').doc(userId);
   }
 
 }

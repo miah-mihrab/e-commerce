@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { ProductService } from './../../services/product.service';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -9,13 +11,41 @@ import { AngularFirestore } from '@angular/fire/firestore';
 export class NavbarComponent implements OnInit {
 
   cartItem;
-  constructor(private db: AngularFirestore) { }
+  userRef: any;
+  username: any;
+  user: boolean = false;
+  userId;
+  constructor(private aFAuth: AngularFireAuth, private productService: ProductService, private db: AngularFirestore) { }
 
-  ngOnInit(): void {
-    //  Update Cart
-    this.db.collection('users').doc('vZUKc5UyL93uhZ9tAmur').valueChanges().subscribe(e => {
-      if (e['itemInCart']) { this.cartItem = Object.keys(e['itemInCart']).length } else { this.cartItem = 0 }
+  ngOnInit() {
+    this.aFAuth.authState.subscribe(state => {
+      console.log(state ? state.email : "Not signed in");
+      if (state) {
+        this.userRef = this.productService.getUserRef(state.email);
+        this.userRef.get().subscribe(e => {
+          this.userId = state.email;
+          this.username = e.data().username;
+          this.db.collection('users').doc(this.userId).valueChanges().subscribe(e => {
+            console.log(e);
+            if (e['itemInCart']) {
+              this.cartItem = Object.keys(e['itemInCart']).length;
+            }
+            else {
+              this.cartItem = 0;
+            }
+          })
+        })
+        this.user = true;
+      }
     })
+
+
   }
 
+  logout() {
+    this.aFAuth.auth.signOut().then(() => {
+      this.user = false;
+      console.log(this.user)
+    });
+  }
 }

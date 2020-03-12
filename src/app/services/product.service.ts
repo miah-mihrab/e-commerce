@@ -16,8 +16,8 @@ export class ProductService {
 
   constructor(private db: AngularFirestore) { }
 
-  getUserRef() {
-    return this.db.collection("users").doc("vZUKc5UyL93uhZ9tAmur");
+  getUserRef(user) {
+    return this.db.collection("users").doc(user);
   }
 
   getProducts() {

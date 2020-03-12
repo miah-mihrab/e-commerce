@@ -1,6 +1,6 @@
+import { AngularFireAuth } from '@angular/fire/auth';
 import { ProductService } from './../../services/product.service';
 import { Component, OnInit } from "@angular/core";
-import { AngularFirestore } from "@angular/fire/firestore";
 
 @Component({
   selector: "app-products",
@@ -13,9 +13,20 @@ export class ProductsComponent implements OnInit {
   userRef: any;
   filterValue = [];
   reservedProducts: any;
-  constructor(private db: AngularFirestore, private productService: ProductService) { }
+  username;
+  constructor(private aFAuth: AngularFireAuth, private productService: ProductService) { }
 
   ngOnInit(): void {
+    this.aFAuth.authState.subscribe(state => {
+      console.log(state ? state.email : "Not signed in");
+      if (state) {
+        console.log(state)
+        this.userRef = this.productService.getUserRef(state.email);
+        this.userRef.get().subscribe(e => {
+          this.username = e.username
+        })
+      }
+    })
     // this.db.collection('products').add({
     //   CaseShape: "Full",
     //   Certification: "RoHS, CE, ISO, CCC, SGS",
@@ -34,7 +45,6 @@ export class ProductsComponent implements OnInit {
     // })
 
     //Get The User Collection For First Time
-    this.userRef = this.productService.getUserRef();
 
     this.productService.getProducts()
       .subscribe(e => {
@@ -50,12 +60,14 @@ export class ProductsComponent implements OnInit {
 
   addItem(product_id) {
 
+    console.log(this.userRef)
     //Add items to an individual's database
     this.userRef.get().subscribe(e => {
       //Find item on user cart or set 0
       let isItem = 0;
       if (e.data()["itemInCart"]) {
         isItem = e.data()["itemInCart"][product_id] || 0;
+
         this.userRef.set(
           {
             itemInCart: {

@@ -8,11 +8,14 @@ import { AppComponent } from './app.component';
 import { environment } from './../environments/environment';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router'
 
 import { AngularFireModule } from '@angular/fire'
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth'
+
+import { AuthenticationComponent } from './components/authentication/authentication.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,18 +23,21 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     ProductComponent,
     NavbarComponent,
     CartControllerComponent,
-    MyCartComponent
+    MyCartComponent,
+    AuthenticationComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
-
+    AngularFireAuthModule,
     RouterModule.forRoot([
       { path: '', component: ProductsComponent },
       { path: 'product/:id', component: ProductComponent },
-      { path: 'my-cart', component: MyCartComponent }
+      { path: 'my-cart', component: MyCartComponent },
+      { path: 'authenticate', component: AuthenticationComponent }
     ])
   ],
   providers: [],
