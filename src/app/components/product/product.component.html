@@ -1,34 +1,60 @@
 <app-navbar></app-navbar>
-
-
-<div class="container mt-4">
-  <div class="row">
-    <div class="col-4">
-      <img [src]="product['imgUrl']" alt="" />
-      <p>{{ product["Name"] }}</p>
-      <p>Price: {{ product['Price'] | currency}}</p>
-      <div class="mb-3 clearfix">
-        <div class=" text-center" style="float:left;">
-          <button type="button" class="btn btn-outline-warning btn-md ml-3" (click)="sub()">-</button>
+<div class="continer mt-4">
+  <ng-container *ngIf="!product">
+    <div
+      style="display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; height: 500px;">
+      <p class="text-center text text-dark display-4">Fetching Product</p>
+      <div>
+        <div class="spinner-grow text-primary" role="status">
+          <span class="sr-only">Loading...</span>
         </div>
-        <div class="text-center" style="float:left; margin-left: 10px;"><input class="form-control text-center"
-            [(ngModel)]="inCart" /></div>
-        <div class="text-center" style="float:left;">
-          <button type="button" class="btn btn-outline-success btn-md ml-2" (click)="add()">+</button>
+        <div class="spinner-grow text-secondary" role="status">
+          <span class="sr-only">Loading...</span>
         </div>
-
-      </div> <button class="btn btn-outline-success btn-md btn-block" (click)="addToCart()">Add To Cart</button>
+        <div class="spinner-grow text-success" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-danger" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-warning" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-info" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-light" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-dark" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
     </div>
-    <div class="col-6">
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">Company: {{ product['Company'] || "None" }}</li>
-        <li class="list-group-item">Port: {{ product['Port'] || "None" }}</li>
-        <li class="list-group-item">Certification: {{ product['Certification'] || "None" }}</li>
-        <li class="list-group-item">Color: {{ product['Color' || 'DialColor'] || "None" }}</li>
-        <li class="list-group-item">Type: {{ product['Type'] || "None"}}</li>
-        <li class="list-group-item">Payment Terms: {{ product['PaymentTerms'] || "None"}}</li>
-        <li class="list-group-item">Style: {{ product['Style'] || "None" }}</li>
-      </ul>
+  </ng-container>
+  <div class="row" *ngIf="product">
+    <div class="col-4 p-3" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+      <img [src]="product['imgUrl']" alt="" style="width: 100%;" />
+    </div>
+    <div class="col-8" style="display: flex; flex-direction: column; justify-content: center;align-items: center;">
+      <div class="col-lg-6 col-sm-12 col-md-7">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Company: {{ product['Company'] || "None" }}</li>
+          <li class="list-group-item">Port: {{ product['Port'] || "None" }}</li>
+          <li class="list-group-item">Certification: {{ product['Certification'] || "None" }}</li>
+          <li class="list-group-item">Color: {{ product['Color' || 'DialColor'] || "None" }}</li>
+          <li class="list-group-item">Type: {{ product['Type'] || "None"}}</li>
+          <li class="list-group-item">Payment Terms: {{ product['PaymentTerms'] || "None"}}</li>
+          <li class="list-group-item">Style: {{ product['Style'] || "None" }}</li>
+        </ul>
+      </div>
+      <div class="mb-3 row text-center mt-4">
+        <div class="col-3"><button class="btn btn-outline-danger" (click)="sub()">-</button></div>
+        <div class="col-6"><input class="form-control form-control text-center" [(ngModel)]="inCart" /></div>
+        <div class="col-3"><button class="btn btn-outline-success" (click)="add()">+</button></div>
+        <button class="btn btn-outline-success btn-md btn-block mt-3" (click)="addToCart()">Add To Cart</button>
+      </div>
     </div>
   </div>
+
 </div>

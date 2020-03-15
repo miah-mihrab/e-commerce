@@ -1,97 +1,139 @@
-<div class="container">
-  <div class="card bg-light">
+<div class="container mt-5 bg bg-light p-5">
 
-    <div class="container mt-5">
+  <ng-container *ngIf="signup">
+    <div style="width: 60%; margin: auto">
+      <h5 class="display-4 text-center">Sign Up</h5>
+      <form [formGroup]="createUserForm" (submit)="createuser()">
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="name">Username:</label>
+          <div class="col-lg">
+            <input type="text" class="form-control" id="title" placeholder="Enter username" formControlName="name" />
+            <div
+              *ngIf="createUserForm.get('name').invalid && (createUserForm.get('name').dirty || createUserForm.get('name').touched)"
+              class="alert alert-danger">
+              <div *ngIf="createUserForm.get('name').errors.required"> * Name is required.</div>
+              <div *ngIf=" createUserForm.get('name').errors.minlength || createUserForm.get('name').errors.maxlength">
+                * Minimum length 3 & Maximum length 15
+              </div>
+              <div *ngIf="createUserForm.get('name').errors.pattern">* Should not any special character or number</div>
+            </div>
+          </div>
+        </div>
 
-      <ng-container *ngIf="signup">
-        <form class="form-horizontal" [formGroup]="createUserForm" (submit)="createuser()">
-          <div class="form-group">
-            <label class="control-label col-sm-2" for="name">Username:</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="title" placeholder="Enter username" formControlName="name"
-                pattern="[a-zA-Z ]*" />
-              <div
-                *ngIf="createUserForm.get('name').invalid && (createUserForm.get('name').dirty || createUserForm.get('name').touched)"
-                class="alert alert-danger">
-                <div *ngIf="createUserForm.get('name').errors.required"> * Name is required.</div>
-                <div
-                  *ngIf=" createUserForm.get('name').errors.minlength || createUserForm.get('name').errors.maxlength">
-                  *
-                  Minimum length 5 &
-                  Maximum length 30
-                </div>
-                <div *ngIf="createUserForm.get('name').errors.pattern">* Should not any special character or number
-                </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="email">Email</label>
+          <div class="col-lg">
+            <input type="email" class="form-control" id="email" placeholder="Email" formControlName="email" required />
+            <div
+              *ngIf="createUserForm.get('email').invalid && (createUserForm.get('email').dirty || createUserForm.get('email').touched)"
+              class="alert alert-danger">
+              <div *ngIf="createUserForm.get('email').errors.required">
+                * Email is required.
+              </div>
+              <div *ngIf="createUserForm.get('email').errors.email">
+                * Should be a valid email address
               </div>
             </div>
           </div>
+        </div>
 
-          <div class="form-group">
-            <label class="control-label col-sm-2" for="email">Email</label>
-            <div class="col-sm-10">
-              <input type="email" class="form-control" id="email" placeholder="Email" formControlName="email" />
-              <div
-                *ngIf="createUserForm.get('email').invalid && (createUserForm.get('email').dirty || createUserForm.get('email').touched)"
-                class="alert alert-danger">
-                <div *ngIf="createUserForm.get('email').errors.required">
-                  * Email is required.
-                </div>
-                <div
-                  *ngIf="createUserForm.get('email').errors.minlength || createUserForm.get('email').errors.maxlength">
-                  * Minimum length 5 & Maximum length 10
-                </div>
-                <div *ngIf="createUserForm.get('email').errors.pattern">
-                  * Should not contain any special character or number
-                </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="password">Password</label>
+          <div class="col-lg">
+            <input type="password" class="form-control" id="password" placeholder="Password"
+              formControlName="password" />
+            <div
+              *ngIf="createUserForm.get('password').invalid && (createUserForm.get('password').dirty || createUserForm.get('password').touched)"
+              class="alert alert-danger">
+              <div *ngIf="createUserForm.get('password').errors.required">
+                * Password is required
+              </div>
+              <div *ngIf="createUserForm.get('password').errors.pattern">
+                * Password should be mixture of lowercase, uppercase, number, and special character
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm" for="confirm_password">Confirm Password</label>
+          <div class="col-lg">
+            <input type="password" class="form-control" id="confirm_password" placeholder="Confirm Password"
+              formControlName="confirm_password" />
+            <div
+              *ngIf="createUserForm.get('confirm_password').invalid && (createUserForm.get('confirm_password').dirty || createUserForm.get('confirm_password').touched)"
+              class="alert alert-danger">
+              <div *ngIf="createUserForm.get('confirm_password').errors.required">
+                * Password is required
+              </div>
+              <div *ngIf="createUserForm.hasError('passwordNotMatch')">
+                * Both password should match.
               </div>
             </div>
           </div>
-
-          <div class="form-group">
-            <label class="control-label col-sm-2" for="password">Password</label>
-            <div class="col-sm-10">
-              <input type="password" class="form-control" id="password" placeholder="Password"
-                formControlName="password" />
-              <div
-                *ngIf="createUserForm.get('password').invalid && (createUserForm.get('password').dirty || createUserForm.get('password').touched)"
-                class="alert alert-danger">
-                <div
-                  *ngIf="createUserForm.get('password').errors.minlength || createUserForm.get('password').errors.maxlength">
-                  * Minimum length 5 & Maximum length 10
-                </div>
-                <div *ngIf="createUserForm.get('password').errors.pattern">
-                  * Should not contain any special character or number
-                </div>
-              </div>
-
-            </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-lg">
+            <button type="submit" class="btn btn-primary" [disabled]="createUserForm.invalid">Sign up</button>
           </div>
-
-          <div class="form-group">
-            <label class="control-label col-sm-2" for="confirm_password">Confirm Password</label>
-            <div class="col-sm-10">
-              <input type="password" class="form-control" id="confirm_password" placeholder="Confirm Password"
-                formControlName="confirm_password" />
-              <div
-                *ngIf="createUserForm.get('confirm_password').invalid && (createUserForm.get('confirm_password').dirty || createUserForm.get('confirm_password').touched)"
-                class="alert alert-danger">
-                <div
-                  *ngIf="createUserForm.get('confirm_password').errors.minlength || createUserForm.get('confirm_password').errors.maxlength">
-                  * Minimum length 5 & Maximum length 10
-                </div>
-                <div *ngIf="createUserForm.get('confirm_password').errors.pattern">
-                  * Should not contain any special character or number
-                </div>
-              </div>
-            </div>
+          <div class="col-sm-offset-2 col-lg">
+            <p class="text-lead" (click)="haveAccount()">Already have an account?</p>
           </div>
-          <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-              <button type="submit" class="btn btn-primary" [disabled]="createUserForm.invalid">Sign up</button>
-            </div>
-          </div>
-        </form>
-      </ng-container>
+        </div>
+      </form>
     </div>
-  </div>
+  </ng-container>
+
+
+
+  <ng-container *ngIf="!signup">
+    <div style="width: 60%; margin: auto;">
+      <h5 class="display-4 text-center">Sign In</h5>
+      <form class="form-horizontal" [formGroup]="signInForm" (submit)="signInUser()">
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="email">Email</label>
+          <div class="col-lg">
+            <input type="email" class="form-control" id="email" placeholder="Email" formControlName="email" required />
+            <div
+              *ngIf="signInForm.get('email').invalid && (signInForm.get('email').dirty || signInForm.get('email').touched)"
+              class="alert alert-danger">
+              <div *ngIf="signInForm.get('email').errors.required">
+                * Email is required.
+              </div>
+              <div *ngIf="signInForm.get('email').errors.email">
+                * Should be a valid email address
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="password">Password</label>
+          <div class="col-lg">
+            <input type="password" class="form-control" id="password" placeholder="Password" formControlName="password"
+              required />
+            <div
+              *ngIf="signInForm.get('password').invalid && (signInForm.get('password').dirty || signInForm.get('password').touched)"
+              class="alert alert-danger">
+              <div *ngIf="signInForm.get('password').errors.required">
+                * Password is required
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-lg">
+            <button type="submit" class="btn btn-primary" [disabled]="signInForm.invalid">Sign In</button>
+          </div>
+          <div class="col-sm-offset-2 col-lg">
+            <p class="text-lead" (click)="haveAccount()">Not have an account?</p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </ng-container>
+
 </div>

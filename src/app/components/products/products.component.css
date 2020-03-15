@@ -1,5 +1,6 @@
 img {
   width: 150px;
+  height: 160px;
   margin: 10px auto;
 }
 
@@ -9,9 +10,4 @@ img {
   overflow: hidden;
   text-overflow: ellipsis;
   text-overflow: ellipsis;
-}
-
-.card:nth-child(1),
-.mLeft {
-  margin-left: 6.7rem !important;
 }

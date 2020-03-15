@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" routerLink="/">E-Commerce</a>
   <button class=" navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -8,22 +8,36 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Fashion</a>
+        <a class="nav-link" href="#">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Motors</a>
+        <a class="nav-link" href="#">Products</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Watch</a>
+        <a class="nav-link" href="#">Deal</a>
       </li>
-      <ng-container *ngIf="user">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Stores</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Contact</a>
+      </li>
+
+    </ul>
+
+    <ul class="nav navbar-nav mr-5">
+      <li class="nav-item" #login *ngIf="!user">
+        <a class="nav-link" routerLink="/authenticate">Login</a>
+      </li>
+      <ng-container *ngIf="user;">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
             {{ username }}
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
+
+            <a class="dropdown-item" [routerLink]="['/admin-panel']" *ngIf="admin">Admin Panel</a>
             <a class="dropdown-item" href="#">Another action</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" (click)="logout()">Log out</a>
@@ -31,13 +45,12 @@
         </li>
       </ng-container>
     </ul>
-
-
     <span class="cart" routerLink="/my-cart"> <i class="fas fa-cart-arrow-down" style="color: gray;"></i>
       <span class="badge badge-warning"> {{ cartItem || 0 }}</span>
     </span>
   </div>
 </nav>
+
 
 <!-- HomeSavedElectronics
 Expand: Electronics

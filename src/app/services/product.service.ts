@@ -16,8 +16,8 @@ export class ProductService {
 
   constructor(private db: AngularFirestore) { }
 
-  getUserRef(user) {
-    return this.db.collection("users").doc(user);
+  getUserRef(userId) {
+    return this.db.collection("users").doc(userId);
   }
 
   getProducts() {
@@ -27,19 +27,45 @@ export class ProductService {
   }
 
 
+  getProduct(id) {
+    return this.db.collection('products').doc(id).valueChanges();
+  }
+
+  addProduct(productForm) {
+
+    this.db.collection('products').add({
+      Name: productForm.value.Name,
+      Type: productForm.value.Type,
+      Company: productForm.value.Company,
+      Port: productForm.value.Port,
+      Waterproof: productForm.value.Waterproof,
+      Price: productForm.value.Price,
+      Color: productForm.value.Color,
+      Certification: productForm.value.Certification,
+      Style: productForm.value.Style,
+      imgUrl: productForm.value.imgUrl
+    });
+  }
+
+  updateProduct(productForm, id) {
+    this.db.collection('products').doc(id).set(productForm.value, { merge: true })
+  }
+
+
+  removeProduct(id) {
+    this.db.collection('products').doc(id).delete();
+  }
+
+
   filterByCategory(reservedProducts: any, event) {
     this.filterValue[event.target.name] = !this.filterValue[event.target.name];
     let keys = Object.keys(this.filterValue);
     let filteredArray = [];
     for (let i = 0; i < keys.length; i++) {
       for (let j = 0; j < Array.from(reservedProducts).length; j++) {
-        console.log(
-          reservedProducts[j]["data"].Type,
-          keys[i],
-          this.filterValue[keys[i]]
-        );
+
         if (
-          reservedProducts[j]["data"].Type === keys[i] &&
+          (reservedProducts[j]["data"].Type).toString() === keys[i] &&
           this.filterValue[keys[i]] === true
         ) {
           filteredArray.push(reservedProducts[j]);
@@ -77,12 +103,10 @@ export class ProductService {
 
 
   filterByName(reservedProducts, productName) {
-    console.log(productName)
     let arr = []
     for (let i = 0; i < reservedProducts.length; i++) {
       arr[i] = reservedProducts[i]['data'].Name
     }
-    // console.log(arr)
     let filteredArray = [];
     for (let i = 0; i < reservedProducts.length; i++) {
       if ((arr[i]).toLowerCase().includes(productName)) {
@@ -94,6 +118,5 @@ export class ProductService {
       return filteredArray;
     }
     return reservedProducts;
-
   }
 }

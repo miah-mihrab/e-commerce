@@ -1,13 +1,14 @@
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-
-import { finalize, map } from "rxjs/operators";
 import {
   FormControl,
   FormGroup,
-  Validators
+  Validators,
+  FormBuilder
 } from "@angular/forms";
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -24,40 +25,67 @@ export class AuthenticationComponent implements OnInit {
       Validators.pattern("[a-zA-Z ]*")
     ]));
   }
+
+  password(formGroup: FormGroup) {
+    const { value: password } = formGroup.get('password');
+    const { value: confirmPassword } = formGroup.get('confirm_password');
+    return password === confirmPassword ? false : { passwordNotMatch: true };
+  }
   //this.validateField(5, 10),
-  createUserForm = new FormGroup({
-    name: new FormControl(""),
-    email: new FormControl(""),
-    password: new FormControl(""),
-    confirm_password: new FormControl(""),
+  createUserForm: FormGroup;
+
+  signInForm = new FormGroup({
+    email: new FormControl("", [
+      Validators.required,
+      Validators.email
+    ]),
+    password: new FormControl("",
+      [
+        Validators.required
+      ]),
   });
 
+  signup: boolean = false;
 
 
-  signup: boolean = true;
-
-
-  constructor(private aFAtuh: AngularFireAuth, private db: AngularFirestore) { }
-
-  async ngOnInit() {
-
-    //await this.aFAtuh.auth.signOut();
-    await this.aFAtuh.auth.signInWithEmailAndPassword('mehrab@gmail.com', '123456')
-    // this.aFAtuh.authState.subscribe(state => {
-    //   console.log(state ? state.email : "Not signed in");
-    // })
+  constructor(private aFAtuh: AngularFireAuth, private db: AngularFirestore, private authService: AuthenticationService, private router: Router, private formBuilder: FormBuilder) {
+    this.createUserForm = this.formBuilder.group({
+      name: this.validateField(3, 15),
+      email: new FormControl("", [
+        Validators.required,
+        Validators.email
+      ]),
+      password: new FormControl("",
+        [
+          Validators.required,
+          Validators.pattern(new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})"))
+        ]),
+      confirm_password: new FormControl("", [
+        Validators.required
+      ]),
+    }, {
+      validators: this.password.bind(this)
+    });
   }
 
 
+  ngOnInit(): void { }
+
+
   createuser() {
-    // console.log(this.createUserForm.value)
-    this.aFAtuh
-      .auth
-      .createUserWithEmailAndPassword(this.createUserForm.value.email, this.createUserForm.value.password)
-      .then(() => {
-        this.db.collection('users').doc(this.createUserForm.value.email).set({
-          username: this.createUserForm.value.name
-        }, { merge: true })
-      })
+    this.authService.signUp(this.createUserForm);
+  }
+
+  signInUser() {
+    try {
+      this.authService.signInUser(this.signInForm);
+    } catch (err) {
+      console.log("User Not Found!")
+
+    }
+  }
+
+  haveAccount() {
+    this.signup = !this.signup
   }
 }
