@@ -32,7 +32,8 @@ export class EditProductComponent implements OnInit {
     Waterproof: new FormControl(""),
     Price: new FormControl(""),
     Certification: new FormControl(""),
-    Style: new FormControl("")
+    Style: new FormControl(""),
+    Stock: new FormControl("")
   });
 
   uploading: boolean = false

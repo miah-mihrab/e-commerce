@@ -31,7 +31,6 @@ export class AuthenticationComponent implements OnInit {
     const { value: confirmPassword } = formGroup.get('confirm_password');
     return password === confirmPassword ? false : { passwordNotMatch: true };
   }
-  //this.validateField(5, 10),
   createUserForm: FormGroup;
 
   signInForm = new FormGroup({
@@ -63,6 +62,9 @@ export class AuthenticationComponent implements OnInit {
       confirm_password: new FormControl("", [
         Validators.required
       ]),
+      role: new FormControl("", [
+        Validators.required
+      ])
     }, {
       validators: this.password.bind(this)
     });
@@ -73,7 +75,8 @@ export class AuthenticationComponent implements OnInit {
 
 
   createuser() {
-    this.authService.signUp(this.createUserForm);
+    console.log(this.createUserForm);
+    //this.authService.signUp(this.createUserForm);
   }
 
   signInUser() {

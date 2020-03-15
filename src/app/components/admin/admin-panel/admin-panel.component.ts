@@ -37,7 +37,11 @@ export class AdminPanelComponent implements OnInit {
       Validators.pattern(new RegExp("^[0-9](\.[0-9]+)?$"))
     ]),
     Certification: this.validateField(3, 20),
-    Style: this.validateField(3, 8)
+    Style: this.validateField(3, 8),
+    Stock: new FormControl("", [
+      Validators.required,
+      Validators.pattern("[0-9]+")
+    ])
   });
 
   uploading: boolean = false
