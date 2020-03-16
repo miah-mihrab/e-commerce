@@ -24,7 +24,6 @@ export class ProductsComponent implements OnInit {
       }
     })
 
-    //Get The User Collection For First Time
     this.productService.getProducts()
       .subscribe(e => {
         this.products = e.map(data => {
@@ -38,39 +37,38 @@ export class ProductsComponent implements OnInit {
   }
 
   addItem(product_id) {
+    this.authService.isUser().subscribe(state => {
+      if (state) {
+        this.userRef.get().subscribe(e => {
+          let isItem = 0;
+          if (e.data()["itemInCart"]) {
+            isItem = e.data()["itemInCart"][product_id] || 0;
 
-    //Add items to an individual's database
-    if (!this.userRef) {
-      alert("You are not logged in to use this service");
-    }
-    else {
-      this.userRef.get().subscribe(e => {
-        //Find item on user cart or set 0
-        let isItem = 0;
-        if (e.data()["itemInCart"]) {
-          isItem = e.data()["itemInCart"][product_id] || 0;
+            this.userRef.set(
+              {
+                itemInCart: {
+                  [product_id]: isItem + 1
+                }
+              },
+              { merge: true }
+            );
+          }
+          if (!e.data()["itemInCart"]) {
+            this.userRef.set(
+              {
+                itemInCart: {
+                  [product_id]: isItem + 1
+                }
+              },
+              { merge: true }
+            );
+          }
+        });
+      } else {
+        alert("You are not logged in to use this service");
+      }
+    })
 
-          this.userRef.set(
-            {
-              itemInCart: {
-                [product_id]: isItem + 1
-              }
-            },
-            { merge: true }
-          );
-        }
-        if (!e.data()["itemInCart"]) {
-          this.userRef.set(
-            {
-              itemInCart: {
-                [product_id]: isItem + 1
-              }
-            },
-            { merge: true }
-          );
-        }
-      });
-    }
   }
 
 

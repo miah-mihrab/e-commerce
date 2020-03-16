@@ -21,27 +21,24 @@ export class MyCartComponent implements OnInit {
   constructor(private db: AngularFirestore, private myCartService: MyCartService, private aFAuth: AngularFireAuth) { }
 
   ngOnInit(): void {
-
     this.aFAuth.authState.subscribe(state => {
       if (state) {
         this.userRef = this.myCartService.getUserRef(state.email);
         this.userRef.get().subscribe(e => {
-          this.itemKeys = Object.keys(e.data()['itemInCart']);
+          this.itemKeys = e.data()['itemInCart'] ? Object.keys(e.data()['itemInCart']) : "";
 
           for (let i = 0; i < this.itemKeys.length; i++) {
             this.db.collection('products').doc(this.itemKeys[i]).get().subscribe(d => {
               this.myProducts[i] = d.data();
               this.totalItem[i] = e.data()['itemInCart'][this.itemKeys[i]];
-              this.totalPrice[i] = e.data()['itemInCart'][this.itemKeys[i]] * d.data()['Price']; //Total price of a product based on number of amount
-              this.total += this.totalPrice[i]; //Total Price of the products that has been selected
-
+              this.totalPrice[i] = e.data()['itemInCart'][this.itemKeys[i]] * d.data()['Price'];
+              this.total += this.totalPrice[i];
               this.cartEmpty = false;
             })
           }
         });
       }
     })
-
 
   }
 
@@ -56,12 +53,11 @@ export class MyCartComponent implements OnInit {
         this.userRef.update({ itemInCart: obj })
       }
     })
-
   }
 
   sub(i: string | number, price: string, id: string) {
-    this.totalItem[i] = (parseFloat(this.totalItem[i]) - 1 >= 0) ? parseFloat(this.totalItem[i]) - 1 : 0; //Total amount of - a particular product
-    this.total = (this.total - parseFloat(price) >= 0) ? this.total - parseFloat(price) : 0.00; //Total Price of the products that has been selected
+    this.totalItem[i] = (parseFloat(this.totalItem[i]) - 1 >= 0) ? parseFloat(this.totalItem[i]) - 1 : 0;
+    this.total = (this.total - parseFloat(price) >= 0) ? this.total - parseFloat(price) : 0.00;
     this.userRef.get().subscribe(e => {
       let obj = e.data()['itemInCart'];
       if (obj[id]) {
@@ -81,16 +77,32 @@ export class MyCartComponent implements OnInit {
     this.userRef.get().subscribe(e => {
       if (e.data()['itemInCart'][id]) {
         let obj = e.data()['itemInCart'];
-        delete obj[id]; //Delete product from object array
+        delete obj[id];
         this.totalPrice[index] = 0;
         this.total = 0;
-        console.log(this.totalPrice)
         this.totalPrice.forEach(e => {
           this.total += e;
         })
-        this.userRef.update({ itemInCart: obj }) // & update the cart
+        this.userRef.update({ itemInCart: obj })
         document.getElementById(id).style.display = "none";
       }
+    })
+  }
+
+  checkout() {
+    this.userRef.get().subscribe(e => {
+      let myOrder = e.data()['itemInCart'];
+      let keys = Object.keys(myOrder);
+      keys.forEach(key => {
+        this.db.collection('products').doc(key).get().subscribe(e => {
+          let stock = e.data()['Stock'] - myOrder[key] >= 0 ? e.data()['Stock'] - myOrder[key] : 0;
+          this.db.collection('products').doc(key).set({
+            "Stock": stock
+          }, { merge: true })
+        })
+
+      })
+      alert("Purchased Product Successfully")
     })
   }
 }

@@ -30,9 +30,10 @@
 
       </ng-container>
     </div>
-    <div class="col-12 text-right mt-4 border border-left-0 border-right-0 border-bottom-0"
-      style="padding-right: 50px !important">
-      <h4>Total: {{ total | currency }}</h4>
+    <div class="col-12 text-right border border-left-0 border-right-0 border-bottom-0"
+      style="padding-right: 150px !important;">
+      <button class="btn btn-outline-success mt-3" (click)="checkout()">Checkout: {{ total | currency }}</button>
+      <!-- <h4></h4> -->
     </div>
   </div>
   <div #noProducts *ngIf="cartEmpty">

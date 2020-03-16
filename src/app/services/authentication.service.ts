@@ -2,7 +2,6 @@ import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -25,7 +24,8 @@ export class AuthenticationService {
       .createUserWithEmailAndPassword(createUserForm.value.email, createUserForm.value.password)
       .then(() => {
         this.db.collection('users').doc(createUserForm.value.email).set({
-          username: createUserForm.value.name
+          username: createUserForm.value.name,
+          role: createUserForm.value.role
         }, { merge: true }).then(() => {
           this.router.navigate(['/'])
         })

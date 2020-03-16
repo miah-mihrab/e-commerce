@@ -23,9 +23,10 @@ export class NavbarComponent implements OnInit {
       if (state) {
         this.userRef = this.productService.getUserRef(state.email);
         this.userRef.get().subscribe(e => {
+
           this.userId = state.email;
           this.username = e.data().username;
-          this.admin = (e.data().admin === true) ? true : false;
+          this.admin = ((e.data().role).toLowerCase() === 'admin') ? true : false;
           this.db.collection('users').doc(this.userId).valueChanges().subscribe(e => {
             if (e['itemInCart']) {
               this.cartItem = Object.keys(e['itemInCart']).length;

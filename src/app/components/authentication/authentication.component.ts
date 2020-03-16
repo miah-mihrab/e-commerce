@@ -1,6 +1,5 @@
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
 import {
   FormControl,
   FormGroup,
@@ -47,7 +46,7 @@ export class AuthenticationComponent implements OnInit {
   signup: boolean = false;
 
 
-  constructor(private aFAtuh: AngularFireAuth, private db: AngularFirestore, private authService: AuthenticationService, private router: Router, private formBuilder: FormBuilder) {
+  constructor(private authService: AuthenticationService, private formBuilder: FormBuilder) {
     this.createUserForm = this.formBuilder.group({
       name: this.validateField(3, 15),
       email: new FormControl("", [
@@ -70,13 +69,10 @@ export class AuthenticationComponent implements OnInit {
     });
   }
 
-
   ngOnInit(): void { }
 
-
   createuser() {
-    console.log(this.createUserForm);
-    //this.authService.signUp(this.createUserForm);
+    this.authService.signUp(this.createUserForm);
   }
 
   signInUser() {

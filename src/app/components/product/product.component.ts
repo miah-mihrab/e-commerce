@@ -16,7 +16,7 @@ export class ProductComponent implements OnInit {
   userRef: any;
   inCart: any = 1;
   id: any;
-
+  state;
   constructor(private db: AngularFirestore,
     private route: ActivatedRoute,
     private authService: AuthenticationService,
@@ -27,6 +27,7 @@ export class ProductComponent implements OnInit {
     this.aFAuth.authState.subscribe(state => {
       if (state) {
         this.userRef = this.authService.getUserRef(state.email);
+        this.state = state;
       }
     })
 
@@ -49,28 +50,29 @@ export class ProductComponent implements OnInit {
   }
 
   addToCart() {
-    if (!this.userRef) {
-      alert('You are not logged in to use this service')
-    }
-    else {
-      if (this.inCart != 0) {
-        this.userRef.get().subscribe(e => {
-          if (e.data()['itemInCart'][this.id]) {
-            let obj = e.data()['itemInCart'];
-            obj[this.id] += parseFloat(this.inCart);
-            this.userRef.update({ itemInCart: obj })
-            this.inCart = 1;
-          } else {
-            this.userRef.set({
-              itemInCart: {
-                [this.id]: parseFloat(this.inCart)
-              }
-            }, { merge: true }).then(() => {
-              this.inCart = 1
-            })
-          }
-        })
+    this.authService.isUser().subscribe(state => {
+      if (state) {
+        if (this.inCart != 0) {
+          this.userRef.get().subscribe(e => {
+            if (e.data()['itemInCart'][this.id]) {
+              let obj = e.data()['itemInCart'];
+              obj[this.id] += parseFloat(this.inCart);
+              this.userRef.update({ itemInCart: obj })
+              this.inCart = 1;
+            } else {
+              this.userRef.set({
+                itemInCart: {
+                  [this.id]: parseFloat(this.inCart)
+                }
+              }, { merge: true }).then(() => {
+                this.inCart = 1
+              })
+            }
+          })
+        }
+      } else {
+        alert('You are not logged in to use this service')
       }
-    }
+    })
   }
 }
