@@ -20,7 +20,7 @@ export class AdminPanelComponent implements OnInit {
       Validators.pattern("[a-zA-Z, ]*")
     ]));
   }
-  //this.validateField(5, 10),
+
   productForm = new FormGroup({
     Name: this.validateField(5, 30),
     Type: this.validateField(4, 15),
@@ -34,7 +34,7 @@ export class AdminPanelComponent implements OnInit {
       ]),
     Price: new FormControl("", [
       Validators.required,
-      Validators.pattern(new RegExp("^[0-9](\.[0-9]+)?$"))
+      Validators.pattern(new RegExp("^[0-9]+(\.[0-9]+)?$"))
     ]),
     Certification: this.validateField(3, 20),
     Style: this.validateField(3, 8),
@@ -92,8 +92,9 @@ export class AdminPanelComponent implements OnInit {
   }
 
 
-  removeProduct(id) {
-    this.productService.removeProduct(id);
+  removeProduct(imgUrl, id) {
+    console.log(imgUrl)
+    this.productService.removeProduct(imgUrl, id);
     alert('Product Deleted')
   }
 }

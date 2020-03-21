@@ -18,6 +18,7 @@ export class MyCartComponent implements OnInit {
   total = 0;
   userRef: any;
   cartEmpty: boolean = true;
+  dataLoaded: boolean = false;
   constructor(private db: AngularFirestore, private myCartService: MyCartService, private aFAuth: AngularFireAuth) { }
 
   ngOnInit(): void {
@@ -26,7 +27,6 @@ export class MyCartComponent implements OnInit {
         this.userRef = this.myCartService.getUserRef(state.email);
         this.userRef.get().subscribe(e => {
           this.itemKeys = e.data()['itemInCart'] ? Object.keys(e.data()['itemInCart']) : "";
-
           for (let i = 0; i < this.itemKeys.length; i++) {
             this.db.collection('products').doc(this.itemKeys[i]).get().subscribe(d => {
               this.myProducts[i] = d.data();
@@ -36,6 +36,7 @@ export class MyCartComponent implements OnInit {
               this.cartEmpty = false;
             })
           }
+          this.dataLoaded = true
         });
       }
     })

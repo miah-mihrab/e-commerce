@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class ProductService {
   fashion;
   _filterByPrice = [];
 
-  constructor(private db: AngularFirestore) { }
+  constructor(private db: AngularFirestore, private aFStorage: AngularFireStorage) { }
 
   getUserRef(userId) {
     return this.db.collection("users").doc(userId);
@@ -52,8 +53,13 @@ export class ProductService {
   }
 
 
-  removeProduct(id) {
-    this.db.collection('products').doc(id).delete();
+  removeProduct(id, imgUrl) {
+    this.aFStorage.storage.refFromURL(imgUrl).delete().then(() => {
+      this.db.collection('products').doc(id).delete();
+    }).catch((error) => {
+      alert("Something went wrong")
+    })
+
   }
 
 
@@ -65,7 +71,7 @@ export class ProductService {
       for (let j = 0; j < Array.from(reservedProducts).length; j++) {
 
         if (
-          (reservedProducts[j]["data"].Type).toString() === keys[i] &&
+          (reservedProducts[j]["data"].Type).toLowerCase() === keys[i] &&
           this.filterValue[keys[i]] === true
         ) {
           filteredArray.push(reservedProducts[j]);

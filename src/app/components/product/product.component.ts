@@ -40,13 +40,26 @@ export class ProductComponent implements OnInit {
 
   }
 
-
+  checkStock() {
+    if (this.inCart > this.product.Stock) {
+      this.inCart = this.product.Stock
+    }
+    if (this.inCart < 1) {
+      this.inCart = 1
+    }
+  }
   add() {
     this.inCart += 1;
+    if (this.inCart > this.product.Stock) {
+      this.inCart = this.product.Stock
+    }
   }
 
   sub() {
     this.inCart -= 1;
+    if (this.inCart < 1) {
+      this.inCart = 1;
+    }
   }
 
   addToCart() {

@@ -20,7 +20,8 @@
             <td>{{ product['data']['Type'] }}</td>
             <td>{{ product['data']['Company'] }}</td>
             <td>{{ product['data']['Price'] }}</td>
-            <td><button class="btn btn-sm btn-outline-danger" (click)="removeProduct(product['id'])">Remove</button>
+            <td><button class="btn btn-sm btn-outline-danger"
+                (click)="removeProduct(product['id'], product['data']['imgUrl'])">Remove</button>
             </td>
           </tr>
         </ng-container>
@@ -59,19 +60,16 @@
       <div class="form-group">
         <label class="control-label col-sm-2" for="type">Type</label>
         <div class="col-lg">
-          <input type="text" class="form-control" id="type" placeholder="Product Type ex: dress"
-            formControlName="Type" />
+          <select class="form-control" formControlName="Type">
+            <option value="">Choose Category</option>
+            <option>Watch</option>
+            <option>Fashion</option>
+          </select>
           <div
             *ngIf="productForm.get('Type').invalid && (productForm.get('Type').dirty || productForm.get('Type').touched)"
             class="alert alert-danger">
             <div *ngIf="productForm.get('Type').errors.required">
               * Type is required.
-            </div>
-            <div *ngIf="productForm.get('Type').errors.minlength || productForm.get('Type').errors.maxlength">
-              * Minimum length 5 & Maximum length 10
-            </div>
-            <div *ngIf="productForm.get('Type').errors.pattern">
-              * Should not contain any special character or number
             </div>
           </div>
         </div>

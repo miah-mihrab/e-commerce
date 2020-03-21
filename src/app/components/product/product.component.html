@@ -49,8 +49,10 @@
         </ul>
       </div>
       <div class="mb-3 row text-center mt-4">
+        <div class="col-12">In stock: {{ product.Stock }}</div>
         <div class="col-3"><button class="btn btn-outline-danger" (click)="sub()">-</button></div>
-        <div class="col-6"><input class="form-control form-control text-center" [(ngModel)]="inCart" /></div>
+        <div class="col-6"><input class="form-control form-control text-center" [(ngModel)]="inCart"
+            (input)="checkStock()" /></div>
         <div class="col-3"><button class="btn btn-outline-success" (click)="add()">+</button></div>
         <button class="btn btn-outline-success btn-md btn-block mt-3" (click)="addToCart()">Add To Cart</button>
       </div>

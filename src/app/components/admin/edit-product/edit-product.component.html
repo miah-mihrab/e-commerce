@@ -3,7 +3,7 @@
   <h5 class="display-4 text-center p-5">Edit Product</h5>
   <div class="row">
     <div class="col-4">
-      <img [src]="product ? product['imgUrl'] : ''" alt="">
+      <img [src]="product ? product['imgUrl'] : ''" alt="" style="width: 100%;">
     </div>
     <div class="col-8">
       <form class="form-horizontal" [formGroup]="productForm" (submit)="editProduct()">
