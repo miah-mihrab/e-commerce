@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Bootstrap Store</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <!-- Custom CSS -->
+    <script src="https://kit.fontawesome.com/3f767fc8e5.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="./OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css">
+    <link href="style.css" rel="stylesheet">
+    <!-- Navigation -->
+
+</head>
+
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="container p-2 pb-5 contact">
+            <div class="row">
+                <div class="col-6">
+                    <!-- border-start = left, border-end = right, border-top = top, border-bottom = bottom
+                    -----------------------------
+                    p = trbl, pt = top, pb = bottom, px = left,right, py =top, bottom, ps = left, pe = right -->
+
+                    <span class="border border-start-0 border-top-0 border-bottom-0 px-2">
+                        <i class="fas fa-headset text-warning"></i>&nbsp;&nbsp;+919-(444)-1234567
+                    </span>
+                    <span class="ms-2">
+                        <i class="far fa-envelope text-warning"></i> &nbsp;&nbsp; support@flynbuy.com
+                    </span>
+
+
+                </div>
+                <div class="col-6">
+                    <!-- 
+                        float-end = move content to right side
+                     -->
+                    <span class="px-2 float-end">
+                        <i class="far fa-clock text-warning"></i>&nbsp; Login
+                    </span>
+                    <span class="border border-start-0 border-top-0 border-bottom-0 px-2 float-end">
+                        <i class="far fa-clock text-warning"></i>&nbsp; Daily deal
+                    </span>
+                    <span class="border border-start-0 border-top-0 border-bottom-0 px-2  float-end location">
+                        <i class="far fa-compass text-warning"></i> &nbsp; Store location
+                    </span>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row mb-4 d-flex justify-content-center">
+                <div class="col-4 text-center logo-section">
+                    <i class="fas fa-dove logo"></i> <br>
+                    <span class="logo-text">flyNbuy</span>
+                </div>
+                <div class="col-4">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search Product"
+                            aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button">Search</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 text-center">
+                    <span class="px-3 cart-component">
+                        <i class="fas fa-shopping-cart cart">
+                            <i class="cart-badge bg-warning">2</i>
+                        </i>
+
+                    </span class="px-3">
+                    <span><i class="far fa-user-circle account"></i></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"
+                style="font-family: 'Courier New', Courier, monospace; font-weight: bold; color: #ddd">flyNbuy</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Pricing</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Shop
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="#">Cart</a></li>
+                            <li><a class="dropdown-item" href="#">Checkout</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Categories
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="#">Accessories</a></li>
+                            <li><a class="dropdown-item" href="#">Top 100 offer</a></li>
+                            <li><a class="dropdown-item" href="#">Sunglass</a></li>
+                            <li><a class="dropdown-item" href="#">Watch</a></li>
+                            <li><a class="dropdown-item" href="#">Man's Product</a></li>
+                            <li><a class="dropdown-item" href="#">Ladies</a></li>
+                            <li><a class="dropdown-item" href="#">Western Dress</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <!-- BANNER -->
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
+            <!-- <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button> -->
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="./sp_online_phone88_generated.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <button class="btn btn-danger rounded-pill px-4 py-2">Buy Now</button>
+                    <!-- <p class="lead" style="font-weight: bold;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque accusamus itaque dolores accusantium eum est?</p> -->
+                </div>
+            </div>
+            <!-- <div class="carousel-item">
+            <img src="./woman-yellow-jacket-copy-space-sale-concept.jpg" class="d-block w-100" alt="...">
+          </div> -->
+            <!-- <div class="carousel-item">
+            <img src="https://cdn.shopify.com/s/files/1/0410/2147/2935/collections/New_Arrival_Banner_1_1200x.png?v=1605857441" class="d-block w-100" alt="...">
+          </div> -->
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+
+
+    <!-- TRENDING -->
+    <br>
+    <br>
+    <br>
+    <div class="section-header">
+        <br>
+        <h5 class="section-name text-center mb-4" style="font-size: 30px;">
+            <span>Trending Item</span>
+        </h5>
+        <ul class="list-group list-group-horizontal d-flex justify-content-center mt-1 mb-3 trending-types">
+            <li class="list-group-item text-center trending-type" onclick="trendingTypeFilter('all')">All</li>
+            <li class="list-group-item text-center trending-type" onclick="trendingTypeFilter('shoes')">Shoes</li>
+            <li class="list-group-item text-center trending-type" onclick="trendingTypeFilter('sunglass')">Sunglass</li>
+            <li class="list-group-item text-center trending-type" onclick="trendingTypeFilter('dress')">Dress</li>
+            <li class="list-group-item text-center trending-type" onclick="trendingTypeFilter('watch')">Watches</li>
+        </ul>
+    </div>
+
+    <!-- d-flex justify-content-center = align it's children in it's center -->
+    <div id="trending" class="container mb-5">
+        <div class="row" id="trending-row">
+            <!-- <div class="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-center mt-2">
+                <div class="card" style="width: 21rem;">
+                    <img width="100" height="350" style="object-fit: cover;" src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=649&q=80" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Neck Shirt</h5>
+                        <div class="col-6">BDT 2300</div>
+                        <a href="#" class="btn btn-danger mt-4">Add To Cart</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-center  mt-2">
+                <div class="card" style="width: 21rem;">
+                    <img width="100" height="350" style="object-fit: cover;" src="https://images.unsplash.com/photo-1554568218-0f1715e72254?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" class="card-img-top" alt="...">
+                    <div class="card-body">
+                            <h5 class="card-title">White Print T-Shirt</h5>
+                            <div class="col-6">BDT 800</div>
+                        <a href="#" class="btn btn-danger mt-4">Add To Cart</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-center mt-2">
+                <div class="card" style="width: 21rem;">
+                    <img width="100" height="350" style="object-fit: cover;" src="https://images.unsplash.com/photo-1573766713733-18f875c7892d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=635&q=80" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Striped Shirt</h5>
+                        <div class="col-6">BDT 1300</div>
+                        <a href="#" class="btn btn-danger mt-4">Add To Cart</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-center mt-2">
+                <div class="card" style="width: 21rem;">
+                    <img width="100" height="350" style="object-fit: cover;" src="https://images.unsplash.com/photo-1572804013427-4d7ca7268217?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=701&q=80" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Red Dress</h5>
+                        <div class="col-6">BDT 2700</div>
+                        <a href="./product.html?id=1234" class="btn btn-danger mt-4">Add To Cart</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-center mt-2">
+                <div class="card" style="width: 21rem;">
+                    <img width="100" height="350" style="object-fit: cover;" src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=649&q=80" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Neck Shirt</h5>
+                        <div class="col-6">BDT 2300</div>
+                        <a href="#" class="btn btn-danger mt-4">Add To Cart</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-center  mt-2">
+                <div class="card" style="width: 21rem;">
+                    <img width="100" height="350" style="object-fit: cover;" src="https://images.unsplash.com/photo-1554568218-0f1715e72254?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" class="card-img-top" alt="...">
+                    <div class="card-body">
+                            <h5 class="card-title">White Print T-Shirt</h5>
+                            <div class="col-6">BDT 800</div>
+                        <a href="#" class="btn btn-danger mt-4">Add To Cart</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-center mt-2">
+                <div class="card" style="width: 21rem;">
+                    <img width="100" height="350" style="object-fit: cover;" src="https://images.unsplash.com/photo-1573766713733-18f875c7892d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=635&q=80" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Striped Shirt</h5>
+                        <div class="col-6">BDT 1300</div>
+                        <a href="#" class="btn btn-danger mt-4">Add To Cart</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-center mt-2">
+                <div class="card" style="width: 21rem;">
+                    <img width="100" height="350" style="object-fit: cover;" src="https://images.unsplash.com/photo-1572804013427-4d7ca7268217?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=701&q=80" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Red Dress</h5>
+                        <div class="col-6">BDT 2700</div>
+                        <a href="./product.html?id=1234" class="btn btn-danger mt-4">Add To Cart</a>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row mt-5 mb-5 ">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-6">
+                            <img src="https://images.unsplash.com/photo-1561997835-49889d0e0355?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NXx8cGVyZnVtZXxlbnwwfDF8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                                alt="..." width="250">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">This is a wider card with supporting text below as a natural
+                                    lead-in to additional content. This content is a little bit longer.</p>
+                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-6">
+                            <img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=649&q=80"
+                                alt="..." width="250">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">This is a wider card with supporting text below as a natural
+                                    lead-in to additional content. This content is a little bit longer.</p>
+                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- HOT DEAL -->
+    <h5 class="section-name text-center mb-4" style="font-size: 30px;">
+        <span>Hot Item</span>
+    </h5>
+    <div id="hot-items"></div>
+     <div class="owl-carousel container mb-5" id="hot-items">
+        <div class="card" style="width: 21rem;">
+            <img width="100" height="350" style="object-fit: cover;"
+                src="https://images.unsplash.com/photo-1510258998236-dd6a60e376a8?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+                class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Neck Shirt</h5>
+                <div class="col-6">BDT 2300</div>
+                <a href="#" class="btn btn-danger mt-4">Add To Cart</a>
+            </div>
+        </div>
+        <div class="card" style="width: 21rem;">
+            <img width="100" height="350" style="object-fit: cover;"
+                src="https://images.unsplash.com/photo-1561997835-49889d0e0355?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NXx8cGVyZnVtZXxlbnwwfDF8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">White Print T-Shirt</h5>
+                <div class="col-6">BDT 800</div>
+                <a href="#" class="btn btn-danger mt-4">Add To Cart</a>
+            </div>
+        </div>
+        <div class="card" style="width: 21rem;">
+            <img width="100" height="350" style="object-fit: cover;"
+                src="https://images.unsplash.com/photo-1543508282-6319a3e2621f?ixid=MXwxMjA3fDB8MHxzZWFyY2h8M3x8c2hvZXN8ZW58MHwxfDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Red Dress</h5>
+                <div class="col-6">BDT 2700</div>
+                <a href="./product.html?id=1234" class="btn btn-danger mt-4">Add To Cart</a>
+            </div>
+        </div>
+        <div class="card" style="width: 21rem;">
+            <img width="100" height="350" style="object-fit: cover;"
+                src="https://images.unsplash.com/photo-1542574621-e088a4464f7e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=628&q=80"
+                class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Striped Shirt</h5>
+                <div class="col-6">BDT 1300</div>
+                <a href="#" class="btn btn-danger mt-4">Add To Cart</a>
+            </div>
+        </div> 
+    </div>
+
+
+
+    <!-- NEWS LETTER -->
+
+    <div class="container p-5 mb-5">
+        <h6 style="font-weight: 700;" class="text-center">NEWSLETTER</h6>
+        <p class="text-center">Subscribe to our newsletter and get <strong class="text-warning ">10%</strong> off your
+            first purchase</p>
+        <div class="d-flex justify-content-center">
+            <div class="input-group input-group-lg" style="width: 50%;">
+                <input type="email" name="subscription-email" id="subscription-email" class="form-control"
+                    placeholder="Email" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <div class="input-group-append input-group-lg">
+                    <button class="btn bg bg-warning text-white" type="button">Subscribe</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+    <!-- FOOTER -->
+    <footer class="bg-dark text-center text-lg-start text-secondary mt-5">
+        <!-- Grid container -->
+        <div class="container p-4">
+          <!--Grid row-->
+          <div class="row">
+            <!--Grid column-->
+            <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+              <h5 class="text-uppercase">About Us</h5>
+      
+              <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
+                molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam
+                voluptatem veniam, est atque cumque eum delectus sint!
+              </p>
+            </div>
+            <!--Grid column-->
+      
+            <!--Grid column-->
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+              <h5 class="text-uppercase">Contacts</h5>
+      
+              <ul class="list-unstyled mb-0">
+                <li>
+                  <a href="#!" class="text-secondary" style="text-decoration: none;"># facebook</a>
+                </li>
+                <li>
+                  <a href="#!" class="text-secondary" style="text-decoration: none;"># twitter</a>
+                </li>
+                <li>
+                  <a href="#!" class="text-secondary" style="text-decoration: none;"># instagram</a>
+                </li>
+                <li>
+                  <a href="mailto:support@flynbuy.com" class="text-secondary" style="text-decoration: none;"># support@flynbuy.com</a>
+                </li>
+              </ul>
+            </div>
+            <!--Grid column-->
+      
+            <!--Grid column-->
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+              <h5 class="text-uppercase mb-0">Links</h5>
+      
+              <ul class="list-unstyled">
+                <li>
+                  <a href="#!" class="text-dark">Link 1</a>
+                </li>
+                <li>
+                  <a href="#!" class="text-dark">Link 2</a>
+                </li>
+                <li>
+                  <a href="#!" class="text-dark">Link 3</a>
+                </li>
+                <li>
+                  <a href="#!" class="text-dark">Link 4</a>
+                </li>
+              </ul>
+            </div>
+            <!--Grid column-->
+          </div>
+          <!--Grid row-->
+        </div>
+        <!-- Grid container -->
+      
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+          © 2021 Copyright:
+          <span class="text-secondary" >flyNbuy</span>
+        </div>
+        <!-- Copyright -->
+      </footer>
+
+    <!-- jQuery Version 3.5.1 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="./main.js"></script>
+
+
+    <script>
+        // OWL CAROUSEL
+        $(document).ready(function () {
+            $(".owl-carousel").owlCarousel({ loop: true, autoplay: true, autoWidth: true });
+        });
+    </script>
+
+</body>
+
+</html>

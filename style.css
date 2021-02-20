@@ -1,0 +1,81 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+header {
+    font-size: 14px;
+    font-weight: 600;
+}
+/* .logo {
+    font-size: 2vw;
+}
+.logo-text {
+    font-size: 2vw;
+} */
+.logo-section {
+    color: rgb(71, 71, 145);
+}
+header span {
+    cursor: pointer;
+    transition: 0.3s all
+}
+header .contact span:hover {
+    color: #F7941D !important;
+}
+.cart, .account {
+    position: relative;
+    font-size: 18px;
+    padding: 10px;
+}
+
+.cart-badge {
+    position: absolute;
+    top: 0;
+    right: 1px;
+    font-style: normal;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    font-size: 14px;
+}
+
+.trending-item:hover{
+    transform: translateY(-10px);
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
+}
+.card-title {
+    font-size: 16px;
+}
+.list-group-item {
+    cursor: pointer;
+    transition: 0.3s all;
+}
+.list-group-item:hover {
+    background-color: #F7941D;
+    color: white;
+}
+
+
+.section-name span {
+    position: relative;
+    display: inline-block;
+}
+.section-name span::after {
+    content: "";
+    height: 2px;
+    width: 50px;
+    background-color: #F7941D;
+    position: absolute;
+    bottom: -0.2em;
+    left: 50%;
+    transform: translate(-50%);
+}
+@media only screen and (max-width: 800px) {
+    /* .logo {
+        font-size: 2.5vw;
+    }
+    .logo-text {
+        font-size: 2.5vw;
+    } */
+  }
