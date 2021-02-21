@@ -15,7 +15,7 @@
     <script src="https://kit.fontawesome.com/3f767fc8e5.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="./OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css">
-    <link href="style.css" rel="stylesheet">
+    <link href="./assets/css/style.css" rel="stylesheet">
     <!-- Navigation -->
 
 </head>
@@ -65,8 +65,7 @@
                 </div>
                 <div class="col-4">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search Product"
-                            aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <input type="text" class="form-control" placeholder="Search Product" oninput="searchProduct(this.value)">
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary" type="button">Search</button>
                         </div>
@@ -137,109 +136,95 @@
 
 
     <div class="container mt-5">
-        <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="row g-0">
-                    <div class="col-md-6">
-                        <img src="https://images.unsplash.com/photo-1561997835-49889d0e0355?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NXx8cGVyZnVtZXxlbnwwfDF8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-                            alt="..." class="img-fluid">
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural
-                                lead-in to additional content. This content is a little bit longer.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-12"></div>
-            <div class="col-lg-3 col-md-6 col-sm-12"></div>
-            <div class="col-lg-3 col-md-6 col-sm-12"></div>
-        </div>
+        <div class="row d-flex justify-content-center mb-5" id="all-products"></div>
+
+        <nav aria-label="Page navigation example mt-5">
+            <ul class="pagination justify-content-center" id="pagination"></ul>
+          </nav>
+    </div>
     </div>
 
-    
+
     <!-- FOOTER -->
-    <footer class="bg-dark text-center text-lg-start text-secondary mt-5">
+    <footer class="bg-dark text-center text-lg-start text-secondary mt-5 sticky-bottom">
         <!-- Grid container -->
         <div class="container p-4">
-          <!--Grid row-->
-          <div class="row">
-            <!--Grid column-->
-            <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
-              <h5 class="text-uppercase">About Us</h5>
-      
-              <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
-                molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam
-                voluptatem veniam, est atque cumque eum delectus sint!
-              </p>
+            <!--Grid row-->
+            <div class="row">
+                <!--Grid column-->
+                <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                    <h5 class="text-uppercase">About Us</h5>
+
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
+                        molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam
+                        voluptatem veniam, est atque cumque eum delectus sint!
+                    </p>
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-uppercase">Contacts</h5>
+
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            <a href="#!" class="text-secondary" style="text-decoration: none;"># facebook</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-secondary" style="text-decoration: none;"># twitter</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-secondary" style="text-decoration: none;"># instagram</a>
+                        </li>
+                        <li>
+                            <a href="mailto:support@flynbuy.com" class="text-secondary" style="text-decoration: none;">#
+                                support@flynbuy.com</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-uppercase mb-0">Links</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!" class="text-dark">Link 1</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-dark">Link 2</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-dark">Link 3</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-dark">Link 4</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--Grid column-->
             </div>
-            <!--Grid column-->
-      
-            <!--Grid column-->
-            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-              <h5 class="text-uppercase">Contacts</h5>
-      
-              <ul class="list-unstyled mb-0">
-                <li>
-                  <a href="#!" class="text-secondary" style="text-decoration: none;"># facebook</a>
-                </li>
-                <li>
-                  <a href="#!" class="text-secondary" style="text-decoration: none;"># twitter</a>
-                </li>
-                <li>
-                  <a href="#!" class="text-secondary" style="text-decoration: none;"># instagram</a>
-                </li>
-                <li>
-                  <a href="mailto:support@flynbuy.com" class="text-secondary" style="text-decoration: none;"># support@flynbuy.com</a>
-                </li>
-              </ul>
-            </div>
-            <!--Grid column-->
-      
-            <!--Grid column-->
-            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-              <h5 class="text-uppercase mb-0">Links</h5>
-      
-              <ul class="list-unstyled">
-                <li>
-                  <a href="#!" class="text-dark">Link 1</a>
-                </li>
-                <li>
-                  <a href="#!" class="text-dark">Link 2</a>
-                </li>
-                <li>
-                  <a href="#!" class="text-dark">Link 3</a>
-                </li>
-                <li>
-                  <a href="#!" class="text-dark">Link 4</a>
-                </li>
-              </ul>
-            </div>
-            <!--Grid column-->
-          </div>
-          <!--Grid row-->
+            <!--Grid row-->
         </div>
         <!-- Grid container -->
-      
+
         <!-- Copyright -->
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-          © 2021 Copyright:
-          <span class="text-secondary" >flyNbuy</span>
+            © 2021 Copyright:
+            <span class="text-secondary">flyNbuy</span>
         </div>
         <!-- Copyright -->
-      </footer>
+    </footer>
 
     <!-- jQuery Version 3.5.1 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-
+    <script src="./assets/js/all-products.js"></script>
+    <script src="./assets/js/search-products.js"></script>
 </body>
 
 </html>
