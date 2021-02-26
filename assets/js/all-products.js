@@ -1,7 +1,7 @@
 const AllProductsRow = document.getElementById('all-products');
 let QueryParams = new URLSearchParams(window.location.search);
-let gender = QueryParams.get('gender');
-console.log(gender)
+let search = QueryParams.get('search');
+console.log(search)
 // const Pagination = document.getElementById('pagination')
 
 let TotalProducts = 0;
@@ -41,10 +41,10 @@ async function GetItems(limit, page) {
     AllProductsRow.innerHTML = ""
     console.log(limit, page)
     
-    let response = await fetch(`http://localhost:3000/api/v1/products/get?limit=${limit}&page=${page}&gender=${gender === null ? '': gender}`);
+    let response = await fetch(`http://localhost:3000/api/v1/products/get?limit=${limit}&page=${page}&search=${search === null ? '': search}`);
     let jsonResponse = (await response.json())
     let all_products = jsonResponse.body;
-
+ if(all_products)
     for (let item of all_products) {
         let html = `
     <div class="col-lg-3 col-md-6 col-sm-12 m-2 border p-1">
@@ -54,7 +54,7 @@ async function GetItems(limit, page) {
                 alt="..." class="img-fluid w-100">
         </div>
         <div class="col-md-6 col-sm-12" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-            <h6>${item.name}</h6>
+            <h6 class="text-center">${item.name}</h6>
             <a class="btn btn-sm btn-danger" href="product.html?id=${item._id}">BDT ${item.price}</a>
         </div>
     </div>
@@ -69,12 +69,13 @@ async function GetItems(limit, page) {
 (async () => {
     const Pagination = document.getElementById('pagination')
 
-    await GetItems(3, 1); //Initially 3 and 1
+    await GetItems(12, 1); //Initially 3 and 1
 
     let html = ``;
-
-    for (let i = 1; i <= Math.ceil(TotalProducts / 3); i++) {
-        html = `<li class="page-item"><a class="page-link" href="", onclick="GetItems(3, ${i})">${i}</a></li>`;
+    console.log('Total Products: ', TotalProducts)
+    for (let i = 1; i <= Math.ceil(TotalProducts / 12); i++) {
+        console.log(i)
+        html = `<li class="page-item"><a class="page-link" href="", onclick="GetItems(12, ${i})">${i}</a></li>`;
         Pagination.innerHTML += html;
     }
 

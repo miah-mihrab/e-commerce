@@ -15,6 +15,7 @@
     <script src="https://kit.fontawesome.com/3f767fc8e5.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="./OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="./assets/style.css">
     <!-- <link href="style.css" rel="stylesheet"> -->
     <!-- Navigation -->
 
@@ -22,10 +23,39 @@
 
 <body>
 
+       <!-- HEADER -->
+       <header>
+        <div class="container p-2 pb-5 contact">
+            <div class="row" id="web-details">
+               
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row mb-4 d-flex justify-content-center">
+                <div class="col-4 text-center logo-section">
+                    <i class="fas fa-dove logo"></i> <br>
+                    <span class="logo-text">flyNbuy</span>
+                </div>
+                <div class="col-4"></div>
+                
+                <div class="col-4 text-center">
+                    <span class="px-3 cart-component">
+                        <i class="fas fa-shopping-cart cart">
+                            <i class="cart-badge bg-warning" id="cartValue"></i>
+                        </i>
+
+                    </span class="px-3">
+                    <span><i class="far fa-user-circle account"></i></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
     <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"
+            <a class="navbar-brand" href="index.html"
                 style="font-family: 'Courier New', Courier, monospace; font-weight: bold; color: #ddd">flyNbuy</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,8 +78,8 @@
                             Shop
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="#">Cart</a></li>
-                            <li><a class="dropdown-item" href="#">Checkout</a></li>
+                            <li><a class="dropdown-item" href="cart.html">Cart</a></li>
+                            <li><a class="dropdown-item" href="checkout.html">Checkout</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -58,20 +88,21 @@
                             Categories
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="#">Accessories</a></li>
-                            <li><a class="dropdown-item" href="#">Top 100 offer</a></li>
-                            <li><a class="dropdown-item" href="#">Sunglass</a></li>
-                            <li><a class="dropdown-item" href="#">Watch</a></li>
-                            <li><a class="dropdown-item" href="#">Man's Product</a></li>
-                            <li><a class="dropdown-item" href="#">Ladies</a></li>
-                            <li><a class="dropdown-item" href="#">Western Dress</a></li>
+                            <li><a class="dropdown-item" href="all-products.html?search=All">All Products</a></li>
+                            <hr>
+                            <li><a class="dropdown-item" href="all-products.html?search=Accessories">Accessories</a></li>
+                            <li><a class="dropdown-item" href="all-products.html?search=Men">Top 100 offer</a></li>
+                            <li><a class="dropdown-item" href="all-products.html?search=Sunglass">Sunglass</a></li>
+                            <li><a class="dropdown-item" href="all-products.html?search=Watch">Watch</a></li>
+                            <li><a class="dropdown-item" href="all-products.html?search=Men">Man's Product</a></li>
+                            <li><a class="dropdown-item" href="all-products.html?search=Women">Ladies</a></li>
+                            <li><a class="dropdown-item" href="all-products.html?search=Dress">Western Dress</a></li>
                         </ul>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-
 
 
     <div id="empty-cart" class="d-flex justify-content-center"></div>
@@ -169,7 +200,7 @@
 
     <!-- FOOTER -->
    <!-- Footer -->
-<footer class="bg-dark text-center text-lg-start text-secondary fixed-bottom">
+<footer class="bg-dark text-center text-lg-start text-secondary sticky-bottom">
     <!-- Grid container -->
     <div class="container p-4">
       <!--Grid row-->
@@ -245,7 +276,10 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-    <script src="./cart.js"></script>
+    <script src="./assets/js/cart.js"></script>
+    <script src="./assets/js/common.js"></script>
+    <script src="./assets/js/getCartItems.js"></script>
+
 </body>
 
 </html>

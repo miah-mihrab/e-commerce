@@ -30,3 +30,7 @@ WebTopHeader.innerHTML += `
 
                 </div>
 `
+
+const accountPage = () => {
+    window.location = "user-profile.html"
+}

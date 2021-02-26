@@ -1,5 +1,5 @@
 let ProductsRow = document.getElementById('all-products');
-console.log(gender)
+// console.log(gender)
 // const Pagination = document.getElementById('pagination')
 
 async function getItems(search) {
@@ -10,7 +10,12 @@ async function getItems(search) {
     let all_products = jsonResponse.body;
 
     for (let item of all_products) {
-        if (item.description.toLowerCase().includes(search.toLowerCase()) || item.type.toLowerCase().includes(search.toLowerCase()) || item.category.toLowerCase().includes(search.toLowerCase())) {
+        if (
+            item.description.toLowerCase().includes(search.toLowerCase()) || 
+            item.type.toLowerCase().includes(search.toLowerCase()) || 
+            item.category.toLowerCase().includes(search.toLowerCase()) ||
+            item.name.toLowerCase().includes(search.toLowerCase())
+            ) {
             let html = `
     <div class="col-lg-3 col-md-6 col-sm-12 m-2 border p-1">
     <div class="row">

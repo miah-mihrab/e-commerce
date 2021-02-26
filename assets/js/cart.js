@@ -70,10 +70,11 @@ function removeItem(id) {
     const Cart = document.getElementById('cart');
 
     let cartItems = localStorage.getItem('mycart');
-    console.log(cartItems !== null, Object.keys(JSON.parse(cartItems)).length > 0)
+    // console.log(cartItems !== null, Object.keys(JSON.parse(cartItems)).length > 0)
     if (cartItems !== null && Object.keys(JSON.parse(cartItems)).length > 0) {
         cartItems = JSON.parse(cartItems);
         const ids = Object.keys(cartItems);
+        console.log(ids)
         const response = await fetch('http://localhost:3000/api/v1/products/get/by/ids', {
             method: 'POST',
             headers: {
@@ -86,13 +87,14 @@ function removeItem(id) {
 
 
         // Set No Of Cart Items
-        document.getElementById('numberOfItems').textContent = `CART ITEMS# ${products.length}`
+        if (products) {
+            document.getElementById('numberOfItems').textContent = `CART ITEMS# ${products.length}`
 
 
-        let count = 0;
-        for (let item of products) {
-            count++;
-            let html = `
+            let count = 0;
+            for (let item of products) {
+                count++;
+                let html = `
           
               <div class="row mb-4" id="pid-${item._id}">
                  <div class="col-md-3 col-lg-3 col-xl-3">
@@ -131,23 +133,27 @@ function removeItem(id) {
               ${count < products.length ? "<hr class='mb-4'>" : ""}
               
             `
-            Cart.innerHTML += html;
+                Cart.innerHTML += html;
 
 
-            // Adding Price
-            cartTotal += item.price * cartItems[item._id].quantity;
+                // Adding Price
+                cartTotal += item.price * cartItems[item._id].quantity;
 
+            }
+
+
+
+
+            // Total Calculation //
+
+
+            // let cartSum = products.reduce((a, b) => ({ price: a.price + b.price }))
+            CartTotal.textContent = cartTotal.toFixed(2)
+            TotalWithCharge.textContent = (cartTotal + (cartTotal * (serviceCharge / 100))).toFixed(2)
+        } else {
+            document.getElementById('cart-details').classList.add('d-none')
+            document.getElementById('empty-cart').innerHTML = `<img src="https://professionalscareer.com/assets/images/emptycart.png" class="w-lg-25 w-md-50 img-fluid"/>`
         }
-
-
-
-
-        // Total Calculation //
-
-
-        // let cartSum = products.reduce((a, b) => ({ price: a.price + b.price }))
-        CartTotal.textContent = cartTotal.toFixed(2)
-        TotalWithCharge.textContent = (cartTotal + (cartTotal * (serviceCharge / 100))).toFixed(2)
     } else {
         document.getElementById('cart-details').classList.add('d-none')
         document.getElementById('empty-cart').innerHTML = `<img src="https://professionalscareer.com/assets/images/emptycart.png" class="w-lg-25 w-md-50 img-fluid"/>`

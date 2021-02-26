@@ -23,66 +23,94 @@
 <body>
 
     <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#"
-                style="font-family: 'Courier New', Courier, monospace; font-weight: bold; color: #ddd">flyNbuy</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Shop
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="#">Cart</a></li>
-                            <li><a class="dropdown-item" href="#">Checkout</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Categories
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="#">Accessories</a></li>
-                            <li><a class="dropdown-item" href="#">Top 100 offer</a></li>
-                            <li><a class="dropdown-item" href="#">Sunglass</a></li>
-                            <li><a class="dropdown-item" href="#">Watch</a></li>
-                            <li><a class="dropdown-item" href="#">Man's Product</a></li>
-                            <li><a class="dropdown-item" href="#">Ladies</a></li>
-                            <li><a class="dropdown-item" href="#">Western Dress</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-
-
-    <div class="container mt-5">
-        <div class="row" id="product">
-            <col-lg-6 class="col-lg-4 col-md-2 col-sm-12" id="product-image"></col-lg-6>
-            <col-lg-6 class="col-lg-8 col-md-10 col-sm-12" id="product-details"></col-lg-6>
+   <!-- HEADER -->
+   <header>
+    <div class="container p-2 pb-5 contact">
+        <div class="row" id="web-details">
+           
         </div>
     </div>
 
+    <div class="container">
+        <div class="row mb-4 d-flex justify-content-center">
+            <div class="col-4 text-center logo-section">
+                <i class="fas fa-dove logo"></i> <br>
+                <span class="logo-text">flyNbuy</span>
+            </div>
+            <div class="col-4"></div>
+            
+            <div class="col-4 text-center">
+                <span class="px-3 cart-component">
+                    <i class="fas fa-shopping-cart cart">
+                        <i class="cart-badge bg-warning" id="cartValue"></i>
+                    </i>
+
+                </span class="px-3">
+                <span onclick="accountPage()"><i class="far fa-user-circle account"></i></span>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="index.html"
+            style="font-family: 'Courier New', Courier, monospace; font-weight: bold; color: #ddd">flyNbuy</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Pricing</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Shop
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" href="cart.html">Cart</a></li>
+                        <li><a class="dropdown-item" href="checkout.html">Checkout</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Categories
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" href="all-products.html?search=All">All Products</a></li>
+                        <hr>
+                        <li><a class="dropdown-item" href="all-products.html?search=Accessories">Accessories</a></li>
+                        <li><a class="dropdown-item" href="all-products.html?search=Men">Top 100 offer</a></li>
+                        <li><a class="dropdown-item" href="all-products.html?search=Sunglass">Sunglass</a></li>
+                        <li><a class="dropdown-item" href="all-products.html?search=Watch">Watch</a></li>
+                        <li><a class="dropdown-item" href="all-products.html?search=Men">Man's Product</a></li>
+                        <li><a class="dropdown-item" href="all-products.html?search=Women">Ladies</a></li>
+                        <li><a class="dropdown-item" href="all-products.html?search=Dress">Western Dress</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
 
+<div class="container mt-5">
+  <div class="row" id="product">
+      <col-lg-6 class="col-lg-4 col-md-2 col-sm-12" id="product-image"></col-lg-6>
+      <col-lg-6 class="col-lg-8 col-md-10 col-sm-12" id="product-details"></col-lg-6>
+  </div>
+</div>
 
     <!-- SIMILAR PRODUCTS -->
 
@@ -209,7 +237,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <script src="./assets/js/product-details.js"></script>
-
+    <script src="./assets/js/common.js"></script>
+    <script src="./assets/js/getCartItems.js"></script>
 </body>
 
 </html>

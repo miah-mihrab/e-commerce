@@ -1,46 +1,67 @@
 
 // dress, jeans, jacket, t-shirt, shirt, shoes, watch, sunglass, perfume
+
+
+let Trendings = [] , HotItems = [], TrendingRow;
+function trendingTypeFilter(type) {
+    console.log(type)
+
+    TrendingRow.innerHTML = ""
+    if (type === 'all') {
+        allTrendings()
+    }
+    let filtered = Trendings.filter(item => (item.type.toLowerCase() === type.toLowerCase() || item.category.toLowerCase() === type.toLowerCase()) && item.search_term === 'trending')
+    console.log(filtered)
+    console.log(Trendings)
+    if (filtered) {
+        for (let item of filtered) {
+            setTrendingItems(item)
+        }
+    }
+}
+
+const allTrendings = () => {
+    for (let item of Trendings) {
+        console.log(item.search_term)
+        if (item.search_term === 'trending') {
+            setTrendingItems(item)
+        }
+
+    }
+};
+
+
+const setTrendingItems = (item) => {
+    let html = `
+<div class="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-center mt-2">
+<div class="card trending-item" style="width: 21rem;">
+    <img width="100" height="350" style="object-fit: cover;" src="${item.images[0]}" class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title">${item.name}</h5>
+        <div class="col-6">${item.price}</div>
+        <a href="product.html?id=${item._id}" class="btn btn-danger mt-4">Add To Cart</a>
+    </div>
+</div>
+</div>    
+`
+    TrendingRow.innerHTML += html
+}
+
 const Root = async () => {
     let fetchTrendings = await fetch('http://localhost:3000/api/v1/products/get/by/search-term?search=trending');
     let fetchHotItems = await fetch('http://localhost:3000/api/v1/products/get/by/search-term?search=hot item');
-    let Trendings = (await fetchTrendings.json()).body;
-    let HotItems = (await fetchHotItems.json()).body;
+    Trendings = (await fetchTrendings.json()).body;
+    HotItems = (await fetchHotItems.json()).body;
     console.log(HotItems)
 
-    let TrendingRow = document.getElementById('trending-row');
+    TrendingRow = document.getElementById('trending-row');
     let HotItemsDiv = document.getElementById('hot-items');
     let OwlCarousel = document.createElement('div');
     console.log(OwlCarousel)
     OwlCarousel.classList.add('owl-carousel');
 console.log(OwlCarousel, 'HE')
     // SET TRENDING ITEM
-    const setTrendingItems = (item) => {
-        let html = `
-    <div class="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-center mt-2">
-    <div class="card trending-item" style="width: 21rem;">
-        <img width="100" height="350" style="object-fit: cover;" src="${item.images[0]}" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">${item.name}</h5>
-            <div class="col-6">${item.price}</div>
-            <a href="product.html?id=${item._id}" class="btn btn-danger mt-4">Add To Cart</a>
-        </div>
-    </div>
-    </div>    
-    `
-        TrendingRow.innerHTML += html
-    }
 
-
-
-    const allTrendings = () => {
-        for (let item of Trendings) {
-            console.log(item.search_term)
-            if (item.search_term === 'trending') {
-                setTrendingItems(item)
-            }
-
-        }
-    };
 
     const allHotItems = () => {
         for (let item of Trendings) {
@@ -66,23 +87,6 @@ console.log(OwlCarousel, 'HE')
 
     allTrendings();
     allHotItems();
-
-
-
-    function trendingTypeFilter(type) {
-        console.log(type)
-        TrendingRow.innerHTML = ""
-        if (type === 'all') {
-            allTrendings()
-        }
-        let filtered = Trendings.filter(item => item.type === type && item.search_term === 'trending')
-        console.log(filtered)
-        if (filtered) {
-            for (let item of filtered) {
-                setTrendingItems(item)
-            }
-        }
-    }
 
 
 }
